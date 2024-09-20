@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Feather from "@expo/vector-icons/Feather";
 import HomeScreen from "./HomeScreen";
 import NotificationsScreen from "./NotificationsScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MeScreen from "./MeScreen";
-import DiscoverScreen from "./DiscoverScreen";
+import FunModeScreen from "./FunModeScreen";
 import AppDrawer from "./AppDrawer";
 import SettingsScreen from "./SettingsScreen";
 import AddScreen from "./AddScreen";
+import CustomTabBar from "@/components/CustomTabBar";
+import { useFonts } from "expo-font";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const MainStacks = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,64 +26,36 @@ const MainTabs = ({ navigation }) => {
     <AppDrawer navigation={navigation}>
       <SafeAreaView style={{ height: "100%" }}>
         <Tab.Navigator
+          tabBar={(props) => <CustomTabBar {...props} />}
           screenOptions={{
             headerShown: false,
-            tabBarActiveTintColor: "#408086",
+            tabBarActiveTintColor: "#2d2d2d",
           }}
         >
           <Tab.Screen
-            name="Home"
+            name="Plan"
             component={HomeScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <Ionicons name="home" size={size} color={color} />
+                <MaterialCommunityIcons
+                  name="clipboard-text-outline"
+                  size={30}
+                  color={color}
+                  // top={4}
+                />
               ),
-              tabBarLabel: "Home",
+              tabBarLabel: null,
             }}
           />
 
           <Tab.Screen
-            name="Discover"
-            component={DiscoverScreen}
+            name="Music"
+            component={FunModeScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <Ionicons name="search" size={size} color={color} />
+                <Feather name="music" size={30} color={color} />
               ),
-              tabBarLabel: "Discover",
-            }}
-          />
-
-          <Tab.Screen
-            name="AddTab"
-            component={Empty} // this is a workaround to show a full screen when this tab is pressed
-            options={{
-              tabBarIcon: ({ color }) => (
-                <Ionicons name="add" size={36} color={color} />
-              ),
-              tabBarLabel: () => null,
-            }}
-            listeners={{
-              tabPress: (e) => {
-                e.preventDefault(); // stop default navigation
-                navigation.navigate("Add"); // manually navigate to the stack screen outside of the tab navigators
-              },
-            }}
-          />
-
-          <Tab.Screen
-            name="Inbox"
-            component={NotificationsScreen}
-            options={{
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="chatbox" size={size} color={color} />
-              ),
-              tabBarLabel: "Inbox",
-              tabBarBadge: unreadCount,
-            }}
-            listeners={{
-              tabPress: () => {
-                setUnreadCount(null);
-              },
+              tabBarLabel: null,
             }}
           />
 
@@ -88,9 +64,9 @@ const MainTabs = ({ navigation }) => {
             component={MeScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <Ionicons name="person" size={size} color={color} />
+                <Ionicons name="person" size={28} color={color} />
               ),
-              tabBarLabel: "Me",
+              tabBarLabel: null,
             }}
           />
         </Tab.Navigator>
