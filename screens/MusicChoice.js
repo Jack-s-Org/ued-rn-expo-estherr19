@@ -11,22 +11,20 @@ import { LinearGradient } from "expo-linear-gradient";
 import { RadioButton } from "react-native-paper";
 
 const MusicChoice = ({ navigation }) => {
-  // Initialize with null so that no radio button is selected initially
   const [checked, setChecked] = React.useState(null);
 
   const handlePress = (value) => {
     setChecked(value);
 
     setTimeout(() => {
-      // Navigate to the respective screen based on the selected radio button
       if (value === "first") {
-        navigation.navigate("MusicSyncSpotify"); // Replace with your actual screen name
+        navigation.navigate("MusicSyncSpotify");
       } else if (value === "second") {
-        navigation.navigate("MusicSyncYtM"); // Replace with your actual screen name
+        navigation.navigate("MusicSyncYtM");
       } else if (value === "third") {
-        navigation.navigate("MetronomeMode"); // Replace with your actual screen name
+        navigation.navigate("MetronomeMode");
       }
-    }, 1000); // 2-second delay
+    }, 1000);
   };
 
   return (
@@ -41,11 +39,10 @@ const MusicChoice = ({ navigation }) => {
           <Text style={styles.subText}>Choose your mode of music.</Text>
         </View>
 
-        {/* First Option with BlurView and RadioButton */}
         <TouchableOpacity onPress={() => handlePress("first")}>
           {checked === "first" ? (
             <LinearGradient
-              colors={["#fff", "#C2F04C"]} // Gradient colors
+              colors={["#fff", "#C2F04C"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.commonView}
@@ -74,11 +71,10 @@ const MusicChoice = ({ navigation }) => {
           )}
         </TouchableOpacity>
 
-        {/* Second Option with BlurView and RadioButton */}
         <TouchableOpacity onPress={() => handlePress("second")}>
           {checked === "second" ? (
             <LinearGradient
-              colors={["#fff", "#FF8E69"]} // Gradient colors
+              colors={["#fff", "#FF8E69"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.commonView}
@@ -107,11 +103,10 @@ const MusicChoice = ({ navigation }) => {
           )}
         </TouchableOpacity>
 
-        {/* Third Option with BlurView and RadioButton */}
         <TouchableOpacity onPress={() => handlePress("third")}>
           {checked === "third" ? (
             <LinearGradient
-              colors={["#fff", "#CEB2FF"]} // Gradient colors
+              colors={["#fff", "#CEB2FF"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.commonView}

@@ -16,6 +16,7 @@ import LoginScreen12 from "./LoginScreen12";
 import Day1Details from "./Day1Details";
 import MusicChoice from "./MusicChoice";
 import MusicSyncSpotify from "./MusicSyncSpotify";
+import SpotifyBreak from "./SpotifyBreak";
 import MusicSyncYtM from "./MusicSyncYtM";
 import MetronomeMode from "./MetronomeMode";
 import { NavigationContainer } from "@react-navigation/native";
@@ -46,6 +47,7 @@ const RootNavigator = () => {
         <Stack.Screen name="Day1Details" component={Day1Details} />
         <Stack.Screen name="MusicChoice" component={MusicChoice} />
         <Stack.Screen name="MusicSyncSpotify" component={MusicSyncSpotify} />
+        <Stack.Screen name="SpotifyBreak" component={SpotifyBreak} />
         <Stack.Screen name="MusicSyncYtM" component={MusicSyncYtM} />
         <Stack.Screen name="MetronomeMode" component={MetronomeMode} />
         <Stack.Screen name="Main" component={MainScreens} />
