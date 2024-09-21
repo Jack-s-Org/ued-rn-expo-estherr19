@@ -1,47 +1,25 @@
 import { StyleSheet, Text } from "react-native";
 import { View, ImageBackground, Image } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
+import Feather from "@expo/vector-icons/Feather";
 
-const MeScreen = ({ navigation }) => {
+const SettingsMode = ({ navigation }) => {
   return (
     <View>
       <ImageBackground
-        source={require("../assets/images/BG6.png")}
+        source={require("../assets/images/BG12.png")}
         style={styles.image}
       >
-        <Entypo
-          name="dots-three-horizontal"
-          size={26}
-          color="white"
-          top={38}
-          left={155}
+        <Feather
+          name="arrow-left"
+          size={24}
+          top={48}
+          right={155}
+          color="#2d2d2d"
           onPress={() => {
-            navigation.replace("SettingsMode");
+            navigation.navigate("MeScreen");
           }}
         />
-        <View style={styles.imgContainer}>
-          <Image
-            source={require("../assets/images/userPhoto.jpg")}
-            style={styles.imageUser}
-          />
-        </View>
-
-        <Text style={styles.titleText}>Charles Lim</Text>
-        <View style={styles.statisticDetails}>
-          <Text style={styles.statisticsTitle}>Statistics</Text>
-          <Text style={styles.statisticssubText}>This week</Text>
-          <Image
-            source={require("../assets/images/statistics.png")}
-            style={styles.statisticsImg}
-          />
-        </View>
-        <View style={styles.profileDetails}>
-          <Text style={styles.profileTitle}>Profile</Text>
-          <Image
-            source={require("../assets/images/profileDetails.png")}
-            style={styles.profileImg}
-          />
-        </View>
       </ImageBackground>
     </View>
   );
@@ -112,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MeScreen;
+export default SettingsMode;

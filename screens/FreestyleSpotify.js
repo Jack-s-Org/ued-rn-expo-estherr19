@@ -2,43 +2,13 @@ import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { View, ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const FunModeScreen = ({ navigation }) => {
+const FreestyleSpotify = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../assets/images/BG5.png")}
+        source={require("../assets/images/BG12.png")}
         style={styles.image}
-      >
-        <Text style={styles.titleText}>Workout Modes</Text>
-        <TouchableOpacity
-          style={styles.freeButton}
-          onPress={() => {
-            navigation.replace("FreestyleSpotify");
-          }}
-        >
-          <Image
-            source={require("../assets/images/gradientButton.png")}
-            style={styles.buttonImage}
-          />
-          <View style={styles.buttonTextContainer}>
-            <Text style={styles.buttonText}>Freestyle Mode</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.freeButton2}
-          onPress={() => {
-            navigation.replace("SelectSong");
-          }}
-        >
-          <Image
-            source={require("../assets/images/gradientButton.png")}
-            style={styles.buttonImage}
-          />
-          <View style={styles.buttonTextContainer}>
-            <Text style={styles.buttonText2}>Fun Mode</Text>
-          </View>
-        </TouchableOpacity>
-      </ImageBackground>
+      ></ImageBackground>
     </View>
   );
 };
@@ -104,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FunModeScreen;
+export default FreestyleSpotify;

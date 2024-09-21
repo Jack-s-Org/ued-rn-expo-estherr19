@@ -84,15 +84,15 @@ const SelectSong = ({ navigation }) => {
               style={styles.buttonImage}
             />
           </TouchableOpacity>
-          <View style={styles.textButtonContainer}>
-            <GradientButton
-              onPress={() => {
-                navigation.replace("LoginScreen12");
-              }}
-            >
-              <Text style={styles.buttonText}>Continue</Text>
-            </GradientButton>
-          </View>
+        </View>
+        <View style={styles.buttonTextContainer}>
+          <GradientButton
+            onPress={() => {
+              navigation.replace("FunModeScreen2");
+            }}
+          >
+            <Text style={styles.buttonText}>Start</Text>
+          </GradientButton>
         </View>
       </ImageBackground>
     </View>

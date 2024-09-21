@@ -24,9 +24,13 @@ import MusicSyncYtM2 from "./MusicSyncYtM2";
 import MetronomeMode from "./MetronomeMode";
 import MetroBreak from "./MetroBreak";
 import MetronomeMode2 from "./MetronomeMode2";
+import FunModeScreen from "./FunModeScreen";
 import SelectSong from "./SelectSong";
+import SettingsMode from "./SettingsMode";
+import FreestyleSpotify from "./FreestyleSpotify";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import MeScreen from "./MeScreen";
 import MainScreens from "./MainScreens";
 
 const Stack = createNativeStackNavigator();
@@ -61,7 +65,12 @@ const RootNavigator = () => {
         <Stack.Screen name="MetronomeMode" component={MetronomeMode} />
         <Stack.Screen name="MetroBreak" component={MetroBreak} />
         <Stack.Screen name="MetronomeMode2" component={MetronomeMode2} />
+
+        <Stack.Screen name="SettingsMode" component={SettingsMode} />
         <Stack.Screen name="Main" component={MainScreens} />
+        <Stack.Screen name="MeScreen" component={MeScreen} />
+        <Stack.Screen name="FunModeScreen" component={FunModeScreen} />
+        <Stack.Screen name="FreestyleSpotify" component={FreestyleSpotify} />
         <Stack.Screen name="SelectSong" component={SelectSong} />
       </Stack.Navigator>
     </NavigationContainer>

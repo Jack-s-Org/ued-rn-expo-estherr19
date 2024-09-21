@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "blank-test",
-    "slug": "blank-test",
+    "name": "JustFit",
+    "slug": "Justfit",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/JustFitIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
