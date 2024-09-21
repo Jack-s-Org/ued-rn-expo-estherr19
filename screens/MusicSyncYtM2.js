@@ -18,7 +18,7 @@ import { BlurView } from "expo-blur";
 
 const { height: screenHeight } = Dimensions.get("window");
 
-const MusicSyncYtM = ({ navigation }) => {
+const MusicSyncYtM2 = ({ navigation }) => {
   const rotateValue = useRef(new Animated.Value(0)).current;
   const blinkOpacity = useRef(new Animated.Value(1)).current;
   const translateY = useRef(new Animated.Value(0)).current;
@@ -129,7 +129,7 @@ const MusicSyncYtM = ({ navigation }) => {
             navigation.replace("Day1Details");
           }}
         />
-        <Text style={styles.workoutName}>Backward Lunge</Text>
+        <Text style={styles.workoutName}>Inclined Push-Up</Text>
         <View style={styles.repsTextContainer}>
           <Text style={styles.numberText}>7</Text>
           <Text style={styles.repsText}>repeats</Text>
@@ -383,4 +383,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MusicSyncYtM;
+export default MusicSyncYtM2;

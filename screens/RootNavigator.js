@@ -17,8 +17,13 @@ import Day1Details from "./Day1Details";
 import MusicChoice from "./MusicChoice";
 import MusicSyncSpotify from "./MusicSyncSpotify";
 import SpotifyBreak from "./SpotifyBreak";
+import MusicSyncSpotify2 from "./MusicSyncSpotify2";
 import MusicSyncYtM from "./MusicSyncYtM";
+import YtMBreak from "./YtMBreak";
+import MusicSyncYtM2 from "./MusicSyncYtM2";
 import MetronomeMode from "./MetronomeMode";
+import MetroBreak from "./MetroBreak";
+import MetronomeMode2 from "./MetronomeMode2";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MainScreens from "./MainScreens";
@@ -48,8 +53,13 @@ const RootNavigator = () => {
         <Stack.Screen name="MusicChoice" component={MusicChoice} />
         <Stack.Screen name="MusicSyncSpotify" component={MusicSyncSpotify} />
         <Stack.Screen name="SpotifyBreak" component={SpotifyBreak} />
+        <Stack.Screen name="MusicSyncSpotify2" component={MusicSyncSpotify2} />
         <Stack.Screen name="MusicSyncYtM" component={MusicSyncYtM} />
+        <Stack.Screen name="YtMBreak" component={YtMBreak} />
+        <Stack.Screen name="MusicSyncYtM2" component={MusicSyncYtM2} />
         <Stack.Screen name="MetronomeMode" component={MetronomeMode} />
+        <Stack.Screen name="MetroBreak" component={MetroBreak} />
+        <Stack.Screen name="MetronomeMode2" component={MetronomeMode2} />
         <Stack.Screen name="Main" component={MainScreens} />
       </Stack.Navigator>
     </NavigationContainer>

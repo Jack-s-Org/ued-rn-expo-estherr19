@@ -1,140 +1,200 @@
+import React, { useRef, useEffect, useState } from "react";
 import {
   ImageBackground,
-  ScrollView,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
-  FlatList,
-  Dimensions,
   Image,
+  Animated,
+  Text,
+  PanResponder,
+  Dimensions,
+  TouchableOpacity,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import Feather from "@expo/vector-icons/Feather";
-import * as React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import WorkoutDetails from "./WorkoutDetails";
+
+const { height: screenHeight } = Dimensions.get("window");
 
 const MetronomeMode = ({ navigation }) => {
+  const rotateValue = useRef(new Animated.Value(0)).current;
+  const blinkOpacity = useRef(new Animated.Value(1)).current;
+  const translateY = useRef(new Animated.Value(0)).current;
+  const dragOffset = useRef(0);
+
+  useEffect(() => {
+    const startRotation = () => {
+      Animated.loop(
+        Animated.timing(rotateValue, {
+          toValue: 1,
+          duration: 8000,
+          useNativeDriver: true,
+        })
+      ).start();
+    };
+
+    const startBlinking = () => {
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(blinkOpacity, {
+            toValue: 0,
+            duration: 500,
+            useNativeDriver: true,
+          }),
+          Animated.timing(blinkOpacity, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true,
+          }),
+        ])
+      ).start();
+    };
+
+    startRotation();
+    startBlinking();
+  }, [rotateValue, blinkOpacity]);
+
+  const rotate = rotateValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "360deg"],
+  });
+
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <ImageBackground
-          source={require("../assets/images/BG4.png")}
-          style={styles.imageBg}
-        ></ImageBackground>
-      </ScrollView>
+      <ImageBackground
+        source={require("../assets/images/BG4.png")}
+        style={styles.imageBg}
+      >
+        <AntDesign
+          name="arrowleft"
+          size={24}
+          color="#2d2d2d"
+          style={styles.backButton}
+          onPress={() => {
+            navigation.replace("Day1Details");
+          }}
+        />
+        <Text style={styles.workoutName}>Abdominal Crunches</Text>
+        <View style={styles.repsTextContainer}>
+          <Text style={styles.numberText}>7</Text>
+          <Text style={styles.repsText}>repeats</Text>
+        </View>
+
+        <Animated.View
+          style={[
+            styles.halfCircle,
+            styles.leftHalfCircle,
+            { opacity: blinkOpacity },
+          ]}
+        />
+
+        <Animated.View
+          style={[
+            styles.halfCircle,
+            styles.rightHalfCircle,
+            { opacity: blinkOpacity },
+          ]}
+        />
+
+        <Animated.Image
+          source={require("../assets/images/animatedCircle.png")}
+          style={[styles.circle, { transform: [{ rotate }] }]}
+        />
+        <TouchableOpacity
+          style={styles.breakButton}
+          onPress={() => {
+            navigation.replace("MetroBreak");
+          }}
+        >
+          <BlurView intensity={80} style={styles.breakButtonBg}>
+            <Text style={styles.breakText}>Break</Text>
+          </BlurView>
+        </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    flexGrow: 1,
+  container: {
+    flex: 1,
   },
   imageBg: {
-    height: 1100,
+    height: 844,
     resizeMode: "cover",
   },
-  blurView: {
-    padding: 34,
-    width: 390,
-    height: 310,
-    overflow: "hidden",
-    borderBottomRightRadius: 35,
-    borderBottomLeftRadius: 35,
-    // justifyContent: "center",
-    // alignItems: "center",
+  backButton: {
+    left: 30,
+    top: 48,
   },
-  imageLegs: {
-    marginLeft: 80,
-    // marginBottom: 20,
-  },
-  arrowContainer: {
+  circle: {
+    width: 500,
+    height: 500,
     position: "absolute",
     top: 50,
-    left: 30,
-    zIndex: 1,
-  },
-  textBox1: {
-    flexDirection: "row",
-    alignItems: "center",
     justifyContent: "center",
-    marginTop: -230,
-  },
-  titleText: {
-    fontFamily: "DaysOne-Regular",
-    fontSize: 45,
-    color: "#2d2d2d",
-  },
-  subText: {
-    fontFamily: "Jost-SemiBold",
-    fontSize: 20,
-    color: "#2d2d2d",
-    marginLeft: 10,
-  },
-  textBox2: {
-    // flexDirection: "column",
-  },
-  horizontalLine: {
-    borderBottomColor: "#5E5E5E",
-    borderBottomWidth: 2,
-    width: "100%",
-    marginVertical: 22,
-  },
-  verticalLine: {
-    borderLeftColor: "#5E5E5E",
-    borderLeftWidth: 2,
-    height: "100%",
-    marginHorizontal: 20,
-  },
-  smallTextBox: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  detailsText: {
-    flexDirection: "column",
-  },
-  boldText: {
-    fontFamily: "Jost-Bold",
-    fontSize: 16,
-    color: "#2d2d2d",
-  },
-  regularText: {
-    fontFamily: "Jost-Regular",
-    fontSize: 16,
-    color: "#797979",
-  },
-  orangeButton: {
-    height: 52,
-    width: 352,
-    backgroundColor: "#FF7700",
-    justifyContent: "center",
-    alignItems: "center",
     alignSelf: "center",
-    borderRadius: 78,
-    position: "absolute",
-    bottom: 20,
-    elevation: 5,
-    shadowColor: "#7E4CA9",
   },
-  buttonText: {
+  workoutName: {
+    fontFamily: "DaysOne-Regular",
+    fontSize: 24,
     color: "#2d2d2d",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: 70,
+  },
+  repsTextContainer: {
+    width: 84,
+    height: 184,
+    justifyContent: "center",
+    alignSelf: "center",
+    zIndex: 1,
+    top: 140,
+  },
+  numberText: {
+    fontFamily: "Jost-Bold",
+    fontSize: 120,
+    marginBottom: -30,
+  },
+  repsText: {
+    fontFamily: "Jost-Medium",
+    fontSize: 20,
+  },
+  halfCircle: {
+    position: "absolute",
+    width: 169,
+    height: 500,
+    borderRadius: 100,
+    backgroundColor: "rgba(255, 119, 0, 0.3)",
+  },
+  leftHalfCircle: {
+    left: -130,
+    top: 110,
+  },
+  rightHalfCircle: {
+    right: -130,
+    top: 110,
+  },
+  breakButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    top: 365,
+  },
+  breakButtonBg: {
+    width: 326,
+    height: 48,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#C0C0C0",
+    borderWidth: 1,
+    overflow: "hidden",
+  },
+  breakText: {
     fontFamily: "Jost-SemiBold",
     fontSize: 16,
-  },
-  workoutContainer: {
-    justifyContent: "flex-start",
-    top: 46,
-  },
-  exerciseText: {
-    fontFamily: "DaysOne-Regular",
-    fontSize: 18,
-    color: "#2d2d2d",
-    marginLeft: 35,
+    color: "white",
   },
 });
 

@@ -18,7 +18,7 @@ import { BlurView } from "expo-blur";
 
 const { height: screenHeight } = Dimensions.get("window");
 
-const MusicSyncYtM = ({ navigation }) => {
+const MusicSyncSpotify2 = ({ navigation }) => {
   const rotateValue = useRef(new Animated.Value(0)).current;
   const blinkOpacity = useRef(new Animated.Value(1)).current;
   const translateY = useRef(new Animated.Value(0)).current;
@@ -129,7 +129,7 @@ const MusicSyncYtM = ({ navigation }) => {
             navigation.replace("Day1Details");
           }}
         />
-        <Text style={styles.workoutName}>Backward Lunge</Text>
+        <Text style={styles.workoutName}>Inclined Push-Up</Text>
         <View style={styles.repsTextContainer}>
           <Text style={styles.numberText}>7</Text>
           <Text style={styles.repsText}>repeats</Text>
@@ -158,7 +158,7 @@ const MusicSyncYtM = ({ navigation }) => {
         <TouchableOpacity
           style={styles.breakButton}
           onPress={() => {
-            navigation.replace("YtMBreak");
+            navigation.replace("SpotifyBreak");
           }}
         >
           <BlurView intensity={80} style={styles.breakButtonBg}>
@@ -178,7 +178,7 @@ const MusicSyncYtM = ({ navigation }) => {
           <LinearGradient colors={["#ffff", "#CEB2FF"]} style={styles.gradient}>
             <View style={styles.tabIndicator} />
 
-            <Text style={styles.tabText}>Listening From YouTube Music</Text>
+            <Text style={styles.tabText}>Listening From Spotify</Text>
             <View style={styles.audioPlayer}>
               <Image
                 source={require("../assets/images/artistPhoto.png")}
@@ -383,4 +383,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MusicSyncYtM;
+export default MusicSyncSpotify2;

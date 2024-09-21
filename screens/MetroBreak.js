@@ -12,7 +12,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 
 const { height: screenHeight } = Dimensions.get("window");
 
-const SpotifyBreak = ({ navigation }) => {
+const MetroBreak = ({ navigation }) => {
   const rotateValue = useRef(new Animated.Value(0)).current;
   const blinkOpacity = useRef(new Animated.Value(1)).current;
 
@@ -48,7 +48,7 @@ const SpotifyBreak = ({ navigation }) => {
     startBlinking();
 
     const timeout = setTimeout(() => {
-      navigation.replace("MusicSyncSpotify2");
+      navigation.replace("MetronomeMode2");
     }, 2000);
 
     return () => clearTimeout(timeout);
@@ -171,4 +171,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SpotifyBreak;
+export default MetroBreak;

@@ -1,20 +1,27 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   ImageBackground,
   StyleSheet,
   View,
-  Text,
+  Image,
   Animated,
+  Text,
+  PanResponder,
   Dimensions,
   TouchableOpacity,
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
 
 const { height: screenHeight } = Dimensions.get("window");
 
-const SpotifyBreak = ({ navigation }) => {
+const MetronomeMode2 = ({ navigation }) => {
   const rotateValue = useRef(new Animated.Value(0)).current;
   const blinkOpacity = useRef(new Animated.Value(1)).current;
+  const translateY = useRef(new Animated.Value(0)).current;
+  const dragOffset = useRef(0);
 
   useEffect(() => {
     const startRotation = () => {
@@ -46,13 +53,7 @@ const SpotifyBreak = ({ navigation }) => {
 
     startRotation();
     startBlinking();
-
-    const timeout = setTimeout(() => {
-      navigation.replace("MusicSyncSpotify2");
-    }, 2000);
-
-    return () => clearTimeout(timeout);
-  }, [rotateValue, blinkOpacity, navigation]);
+  }, [rotateValue, blinkOpacity]);
 
   const rotate = rotateValue.interpolate({
     inputRange: [0, 1],
@@ -74,10 +75,10 @@ const SpotifyBreak = ({ navigation }) => {
             navigation.replace("Day1Details");
           }}
         />
-        <Text style={styles.workoutName}>Take a break!</Text>
-        <View style={styles.timeTextContainer}>
-          <Text style={styles.timeText}>00:30</Text>
-          <Text style={styles.secondsText}>s</Text>
+        <Text style={styles.workoutName}>Inclined Push-Up</Text>
+        <View style={styles.repsTextContainer}>
+          <Text style={styles.numberText}>7</Text>
+          <Text style={styles.repsText}>repeats</Text>
         </View>
 
         <Animated.View
@@ -100,6 +101,16 @@ const SpotifyBreak = ({ navigation }) => {
           source={require("../assets/images/animatedCircle.png")}
           style={[styles.circle, { transform: [{ rotate }] }]}
         />
+        <TouchableOpacity
+          style={styles.breakButton}
+          onPress={() => {
+            navigation.replace("MetroBreak");
+          }}
+        >
+          <BlurView intensity={80} style={styles.breakButtonBg}>
+            <Text style={styles.breakText}>Break</Text>
+          </BlurView>
+        </TouchableOpacity>
       </ImageBackground>
     </View>
   );
@@ -127,32 +138,28 @@ const styles = StyleSheet.create({
   },
   workoutName: {
     fontFamily: "DaysOne-Regular",
-    fontSize: 32,
+    fontSize: 24,
     color: "#2d2d2d",
     justifyContent: "center",
     alignSelf: "center",
     top: 70,
   },
-  timeTextContainer: {
-    width: 180,
-    height: 76,
+  repsTextContainer: {
+    width: 84,
+    height: 184,
     justifyContent: "center",
     alignSelf: "center",
     zIndex: 1,
-    top: 190,
-    flexDirection: "row",
+    top: 140,
   },
-  timeText: {
+  numberText: {
     fontFamily: "Jost-Bold",
-    fontSize: 50,
+    fontSize: 120,
+    marginBottom: -30,
   },
-  secondsText: {
-    fontFamily: "Jost-Regular",
-    fontSize: 32,
-    color: "#818181",
-    justifyContent: "center",
-    alignSelf: "center",
-    marginLeft: 4,
+  repsText: {
+    fontFamily: "Jost-Medium",
+    fontSize: 20,
   },
   halfCircle: {
     position: "absolute",
@@ -169,6 +176,26 @@ const styles = StyleSheet.create({
     right: -130,
     top: 110,
   },
+  breakButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    top: 365,
+  },
+  breakButtonBg: {
+    width: 326,
+    height: 48,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#C0C0C0",
+    borderWidth: 1,
+    overflow: "hidden",
+  },
+  breakText: {
+    fontFamily: "Jost-SemiBold",
+    fontSize: 16,
+    color: "white",
+  },
 });
 
-export default SpotifyBreak;
+export default MetronomeMode2;
