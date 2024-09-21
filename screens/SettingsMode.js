@@ -17,7 +17,7 @@ const SettingsMode = ({ navigation }) => {
           right={155}
           color="#2d2d2d"
           onPress={() => {
-            navigation.navigate("MeScreen");
+            navigation.navigate("User");
           }}
         />
       </ImageBackground>

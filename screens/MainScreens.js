@@ -56,7 +56,7 @@ const MainTabs = ({ navigation }) => {
           }}
         />
         <Tab.Screen
-          name="MeScreen"
+          name="User"
           component={MeScreen}
           options={{
             tabBarIcon: ({ color, size }) => (

@@ -1,14 +1,31 @@
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { View, ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import Feather from "@expo/vector-icons/Feather";
 
 const FreestyleSpotify = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../assets/images/BG12.png")}
+        source={require("../assets/images/BG13.png")}
         style={styles.image}
-      ></ImageBackground>
+      >
+        <Feather
+          name="arrow-left"
+          size={24}
+          top={48}
+          right={155}
+          color="#2d2d2d"
+          onPress={() => {
+            navigation.navigate("Music");
+          }}
+        />
+        <Image
+          source={require("../assets/images/gradientButton.png")}
+          style={styles.buttonImage}
+        />
+        <Text style={styles.buttonText}>Push Yourself!</Text>
+      </ImageBackground>
     </View>
   );
 };
@@ -30,27 +47,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     right: 50,
   },
-  freeButton: {
-    width: 400,
-    height: 400,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-    right: 120,
-  },
-  freeButton2: {
-    width: 400,
-    height: 400,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-    left: 120,
-    bottom: 150,
-  },
+
   buttonImage: {
-    width: "100%",
-    height: "100%",
+    width: 330,
+    height: 330,
     position: "absolute",
+    top: 510,
   },
   buttonTextContainer: {
     width: 110,
@@ -58,19 +60,10 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   buttonText: {
-    fontFamily: "Jost-SemiBold",
-    fontSize: 24,
+    fontFamily: "DaysOne-Regular",
+    fontSize: 28,
     color: "#2d2d2d",
-    zIndex: 1,
-    top: 14,
-    left: 10,
-  },
-  buttonText2: {
-    fontFamily: "Jost-SemiBold",
-    fontSize: 24,
-    color: "#2d2d2d",
-    zIndex: 1,
-    top: 30,
+    top: 630,
   },
 });
 
