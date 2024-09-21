@@ -8,22 +8,6 @@ import {
   Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
-
-const GradientButton = ({ children, onPress }) => {
-  return (
-    <TouchableOpacity style={styles.gradientButton} onPress={onPress}>
-      <LinearGradient
-        colors={["#FFD100", "#FF7700"]}
-        start={[0, 0]}
-        end={[1, 1]}
-        style={styles.gradientBackground}
-      >
-        {children}
-      </LinearGradient>
-    </TouchableOpacity>
-  );
-};
 
 const LoginScreen11 = ({ navigation }) => {
   const [progress, setProgress] = useState(0);
@@ -67,16 +51,6 @@ const LoginScreen11 = ({ navigation }) => {
             source={require("../assets/images/animatedCircle.png")}
             style={styles.circle}
           />
-
-          <View style={styles.textButtonContainer}>
-            <GradientButton
-              onPress={() => {
-                navigation.replace("LoginScreen12");
-              }}
-            >
-              <Text style={styles.buttonText}>Continue</Text>
-            </GradientButton>
-          </View>
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -126,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   progressText: {
-    top: 170,
+    top: 85,
     fontSize: 40,
     fontFamily: "Jost-Bold",
     position: "absolute",
@@ -134,7 +108,7 @@ const styles = StyleSheet.create({
     color: "#2d2d2d",
   },
   circle: {
-    top: -25,
+    bottom: 110,
   },
   textButtonContainer: {
     marginBottom: 40,
