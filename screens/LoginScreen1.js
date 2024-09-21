@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
-import AntDesign from "@expo/vector-icons/AntDesign";
 
 const GradientButton = ({ children, onPress }) => {
   return (
@@ -26,24 +25,27 @@ const GradientButton = ({ children, onPress }) => {
 
 const LoginScreen1 = ({ navigation }) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safeArea}>
       <ImageBackground
         style={styles.image}
-        source={require("../assets/images/Onboarding3.png")}
+        source={require("../assets/images/BG7.png")}
       >
-        <View style={styles.textContainer}>
-          <View style={styles.titleText}>
-            <Text style={styles.welcomeText}>To Home~</Text>
+        <View style={styles.container}>
+          <View style={styles.textContainer}>
+            <Text style={styles.welcomeText}>JustFit</Text>
           </View>
-        </View>
-        <View style={styles.textButtonContainer}>
-          <GradientButton
-            onPress={() => {
-              navigation.replace("Main");
-            }}
-          >
-            <AntDesign name="arrowright" size={24} color="white" />
-          </GradientButton>
+          <View style={styles.textButtonContainer}>
+            <GradientButton
+              onPress={() => {
+                navigation.replace("LoginScreen2");
+              }}
+            >
+              <Text style={styles.buttonText}>Get Started</Text>
+            </GradientButton>
+            <Text style={styles.loginText}>
+              Already have an account? Log In
+            </Text>
+          </View>
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -51,54 +53,54 @@ const LoginScreen1 = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   image: {
-    height: 800,
+    flex: 1,
     resizeMode: "cover",
     alignItems: "center",
     justifyContent: "center",
   },
-  textContainer: {
-    padding: 36,
-    paddingTop: 380,
+  container: {
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems: "center",
   },
-  titleText: {
-    marginBottom: 12,
+  textContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   welcomeText: {
     fontFamily: "DaysOne-Regular",
     fontSize: 32,
-    color: "#FF7700",
-  },
-  detailsText: {
-    fontFamily: "Jost-Regular",
-    fontSize: 18,
     color: "#2d2d2d",
-  },
-  mainText: {
-    fontFamily: "Jost-SemiBold",
-    fontSize: 20,
-    color: "#2d2d2d",
-    paddingTop: 18,
   },
   textButtonContainer: {
-    // alignItems: "center",
-    // marginTop: 10,
+    marginBottom: 40,
+    alignItems: "center",
   },
   gradientButton: {
-    marginLeft: 250, // Adjust to move the button horizontally
-    marginTop: 16, // Adjust to move the button vertically
-    alignSelf: "center", // Adjust to align the button vertically within its container
+    marginBottom: 10,
   },
   gradientBackground: {
-    width: 54,
-    height: 54,
-    borderRadius: 50, // Round shape
+    width: 271,
+    height: 52,
+    borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
   },
-  nextButton: {
-    height: 54,
-    width: 200,
+  buttonText: {
+    color: "white",
+    fontFamily: "Jost-Medium",
+    fontSize: 16,
+  },
+  loginText: {
+    marginTop: 10,
+    color: "#2d2d2d",
+    fontFamily: "Jost-Medium",
+    fontSize: 14,
   },
 });
 

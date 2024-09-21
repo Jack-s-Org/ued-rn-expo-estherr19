@@ -5,7 +5,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  FlatList,
   Dimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,6 +13,8 @@ import * as React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
 import PlanButton from "./PlanButton";
+import Carousel from "react-native-reanimated-carousel";
+import moment from "moment";
 
 const GradientButton = ({ text }) => {
   return (
@@ -31,10 +32,36 @@ const GradientButton = ({ text }) => {
 };
 
 const HomeScreen = ({ navigation }) => {
+  const [currentWeek, setCurrentWeek] = React.useState(
+    moment().startOf("week")
+  );
+
+  const generateWeeks = () => {
+    let weeks = [];
+    let startDate = moment().startOf("month").startOf("week");
+
+    for (let i = 0; i < 12; i++) {
+      weeks.push(
+        Array.from({ length: 7 }, (_, index) => {
+          const day = moment(startDate).add(index, "days");
+          return {
+            dayName: day.format("dd").charAt(0),
+            date: day.format("D"),
+          };
+        })
+      );
+      startDate.add(7, "days");
+    }
+
+    return weeks;
+  };
+
+  const weeksData = generateWeeks();
+
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
       <ImageBackground
-        source={require("../assets/images/backgroundOne.png")}
+        source={require("../assets/images/BG1.png")}
         style={styles.image}
       >
         <View style={styles.containerAll}>
@@ -45,43 +72,26 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.mainText}>June 2024</Text>
             <GradientButton text="This week" />
           </View>
-          <BlurView
-            intensity={100}
-            style={{
-              padding: 10,
-              width: "100%",
-              flexDirection: "row",
-              textAlign: "center",
-            }}
-          >
-            <View>
-              <Text>M</Text>
-              <Text>10</Text>
-            </View>
-            <View>
-              <Text>T</Text>
-              <Text>11</Text>
-            </View>
-            <View>
-              <Text>W</Text>
-              <Text>12</Text>
-            </View>
-            <View>
-              <Text>T</Text>
-              <Text>13</Text>
-            </View>
-            <View>
-              <Text>F</Text>
-              <Text>14</Text>
-            </View>
-            <View>
-              <Text>S</Text>
-              <Text>15</Text>
-            </View>
-            <View>
-              <Text>S</Text>
-              <Text>16</Text>
-            </View>
+          <BlurView intensity={100} style={styles.calendarContainer}>
+            <Carousel
+              loop={false}
+              width={Dimensions.get("window").width - 80}
+              height={60}
+              autoPlay={false}
+              data={weeksData}
+              scrollAnimationDuration={1000}
+              containerStyle={styles.carouselStyle}
+              renderItem={({ item }) => (
+                <View style={styles.weekContainer}>
+                  {item.map((day, index) => (
+                    <View key={index} style={styles.dayContainer}>
+                      <Text style={styles.dayText}>{day.dayName}</Text>
+                      <Text style={styles.dateText}>{day.date}</Text>
+                    </View>
+                  ))}
+                </View>
+              )}
+            />
           </BlurView>
           <View style={styles.planButtonContainer}>
             <PlanButton
@@ -167,22 +177,24 @@ const styles = StyleSheet.create({
   },
   containerAll: {
     paddingTop: 62,
+    alignItems: "center",
   },
   image: {
     height: 1300,
     resizeMode: "cover",
-
     alignItems: "center",
   },
   greetingText: {
     fontFamily: "Jost-Regular",
     fontSize: 16,
     color: "#2d2d2d",
+    right: 115,
   },
   titleText: {
     fontFamily: "DaysOne-Regular",
     fontSize: 30,
     color: "#2d2d2d",
+    right: 45,
   },
   mainText: {
     fontFamily: "Jost-SemiBold",
@@ -197,10 +209,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   gradientButton: {
-    marginLeft: 140, // Adjust to move the button horizontally
-    marginTop: 14, // Adjust to move the button vertically
-    alignSelf: "center", // Adjust to align the button vertically within its container
+    marginLeft: 140,
+    marginTop: 14,
+    alignSelf: "center",
   },
+
   gradientBackground: {
     width: 90,
     height: 34,
@@ -218,6 +231,42 @@ const styles = StyleSheet.create({
     alignContent: "center",
     flexDirection: "column",
     marginTop: 16,
+  },
+  calendarContainer: {
+    padding: 10,
+    width: 328,
+    height: 84,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+    marginVertical: 20,
+    borderRadius: 16,
+  },
+  carouselStyle: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  weekContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    flex: 1,
+  },
+  dayContainer: {
+    alignItems: "center",
+    marginHorizontal: 10,
+    justifyContent: "center",
+  },
+  dayText: {
+    fontFamily: "Jost-SemiBold",
+    fontSize: 16,
+    color: "#818181",
+    paddingBottom: 6,
+  },
+  dateText: {
+    fontFamily: "Jost-SemiBold",
+    fontSize: 16,
+    color: "#2d2d2d",
   },
 });
 
